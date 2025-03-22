@@ -1,0 +1,25 @@
+﻿@page "/add"
+@using PersonalFinanceTracker.Data.Models
+
+<h3>Add Transaction</h3>
+
+<EditForm OnValidSubmit="HandleValidSubmit" Model="transaction" FormName="AddTransactionForm">
+    <DataAnnotationsValidator />
+    <ValidationSummary /> 
+    <div>
+        <label for="amount">Amount:</label>
+        <InputNumber id="amount" @bind-Value="transaction.Amount" class="form-control" required />
+    </div>
+
+    <div>
+        <label for="date">Date:</label>
+        <InputDate id="date" @bind-Value="transaction.Date" class="form-control" required />
+    </div>
+
+    <div>
+        <label for="description">Description:</label>
+        <InputText id="description" @bind-Value="transaction.Description" class="form-control" required />
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Add Transaction</button>  
+</EditForm>

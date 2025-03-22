@@ -1,0 +1,12 @@
+# .NET build outputs
+bin/
+obj/
+
+# SQLite database
+finance.db
+identity.db
+
+# Visual Studio files
+*.user
+*.suo
+.vs/
