@@ -11,14 +11,29 @@ using PersonalFinanceTracker.Data;
 namespace PersonalFinanceTracker.Data.Migrations
 {
     [DbContext(typeof(FinanceDbContext))]
-    [Migration("20250322151715_MadeUserIdNullable")]
-    partial class MadeUserIdNullable
+    [Migration("20250323123159_AddedCategory")]
+    partial class AddedCategory
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder.HasAnnotation("ProductVersion", "8.0.14");
+
+            modelBuilder.Entity("PersonalFinanceTracker.Data.Models.Category", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Categories");
+                });
 
             modelBuilder.Entity("PersonalFinanceTracker.Data.Models.Transaction", b =>
                 {
@@ -29,13 +44,13 @@ namespace PersonalFinanceTracker.Data.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime?>("Date")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

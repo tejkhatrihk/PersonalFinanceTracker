@@ -11,7 +11,7 @@ using PersonalFinanceTracker.Data;
 namespace PersonalFinanceTracker.Data.Migrations
 {
     [DbContext(typeof(FinanceDbContext))]
-    [Migration("20250322151058_InitialCreate")]
+    [Migration("20250323122751_InitialCreate")]
     partial class InitialCreate
     {
         /// <inheritdoc />
@@ -29,14 +29,13 @@ namespace PersonalFinanceTracker.Data.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("TEXT");
 
-                    b.Property<DateTime>("Date")
+                    b.Property<DateTime?>("Date")
+                        .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Description")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("UserId")
                         .IsRequired()
+                        .HasMaxLength(100)
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");

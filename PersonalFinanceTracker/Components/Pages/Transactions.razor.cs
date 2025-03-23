@@ -13,6 +13,6 @@ public partial class Transactions: ComponentBase
 
     protected override async Task OnInitializedAsync()
     {
-        transactions = await DbContext.Transactions.ToListAsync();
+        transactions = await DbContext.Transactions.ToListAsync().ConfigureAwait(true);
     }
 }

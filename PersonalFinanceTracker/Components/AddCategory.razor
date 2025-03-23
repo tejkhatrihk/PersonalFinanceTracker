@@ -1,0 +1,9 @@
+﻿<EditForm FormName="AddCategoryForm" OnValidSubmit="HandleValidSubmit" Model="category">
+    <DataAnnotationsValidator />
+    <ValidationSummary />
+    <div class="form-group">
+        <label for="category">Category:</label>
+        <InputText id="categoryName" @bind-Value="category.Name"></InputText>
+    </div>
+    <button type="submit" class="btn btn-primary mt-3">Add Category</button>
+</EditForm>

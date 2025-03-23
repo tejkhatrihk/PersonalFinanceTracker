@@ -19,6 +19,7 @@ else
                 <th>Date</th>
                 <th>Amount</th>
                 <th>Description</th>
+                <th>Category</th>
             </tr>
         </thead>
         <tbody>
@@ -28,6 +29,7 @@ else
                     <td>@transaction.Date?.ToString("dd-MMM-yyyy")</td>
                     <td>@transaction.Amount.ToString("C", CultureInfo.GetCultureInfo("en-CA"))</td>
                     <td>@transaction.Description</td>
+                    <td>@transaction.CategoryId</td>
                 </tr>
             }
         </tbody>

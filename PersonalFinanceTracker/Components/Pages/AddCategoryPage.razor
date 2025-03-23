@@ -1,0 +1,9 @@
+﻿@page "/addcategory"
+@rendermode InteractiveServer
+<h3>Add Category</h3>
+
+<AddCategory OnCategoryAdded="HandleCategoryAdded"></AddCategory>
+
+<div>
+    <Categories @ref="categoriesComponent"></Categories>
+</div>
