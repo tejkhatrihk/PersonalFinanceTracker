@@ -20,10 +20,10 @@ public partial class AddTransaction
 
     private async Task HandleValidSubmit()
     {
+        Console.WriteLine($"Before Save - Amount: {transaction.Amount}, Date: {transaction.Date}, Description: {transaction.Description}");
         DbContext.Transactions.Add(transaction);
         await DbContext.SaveChangesAsync();
-
-        transaction = new();
+        transaction = new(); // Reset after save
         Navigation.NavigateTo("/transactions");
     }
 }
