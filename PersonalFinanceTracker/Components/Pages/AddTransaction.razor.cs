@@ -18,7 +18,7 @@ public partial class AddTransaction
 
     protected async override Task OnInitializedAsync()
     {
-
+        transaction.Date = DateTime.Now;
         categories = await DbContext.Categories.ToListAsync().ConfigureAwait(false);
 
         await base.OnInitializedAsync().ConfigureAwait(false);

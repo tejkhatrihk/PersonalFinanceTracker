@@ -4,8 +4,7 @@ using PersonalFinanceTracker.Data;
 using PersonalFinanceTracker.Data.Models;
 
 namespace PersonalFinanceTracker.Components.Pages;
-
-public partial class Transactions: ComponentBase
+public partial class Transactions : ComponentBase
 {
     [Inject]
     public FinanceDbContext DbContext { get; set; } = default!;
@@ -13,6 +12,9 @@ public partial class Transactions: ComponentBase
 
     protected override async Task OnInitializedAsync()
     {
-        transactions = await DbContext.Transactions.ToListAsync().ConfigureAwait(true);
+        transactions = await DbContext.Transactions
+            .Include(c=>c.Category)
+            .OrderByDescending(a => a.Date)
+            .ToListAsync().ConfigureAwait(true);
     }
 }

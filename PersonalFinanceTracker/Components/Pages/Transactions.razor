@@ -29,9 +29,13 @@ else
                     <td>@transaction.Date?.ToString("dd-MMM-yyyy")</td>
                     <td>@transaction.Amount.ToString("C", CultureInfo.GetCultureInfo("en-CA"))</td>
                     <td>@transaction.Description</td>
-                    <td>@transaction.CategoryId</td>
+                    <td>@transaction.Category?.Name</td>
                 </tr>
             }
+            <tr>
+                <td class="fw-bold">Total</td>
+                <td colspan="3" class="align-content-lg-start">@transactions.Sum(a => a.Amount).ToString("C", CultureInfo.GetCultureInfo("en-CA"))</td>
+            </tr>
         </tbody>
     </table>
 }

@@ -11,8 +11,8 @@ using PersonalFinanceTracker.Data;
 namespace PersonalFinanceTracker.Data.Migrations
 {
     [DbContext(typeof(FinanceDbContext))]
-    [Migration("20250323123159_AddedCategory")]
-    partial class AddedCategory
+    [Migration("20250323201816_InitialCreate")]
+    partial class InitialCreate
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -44,6 +44,9 @@ namespace PersonalFinanceTracker.Data.Migrations
                     b.Property<decimal>("Amount")
                         .HasColumnType("TEXT");
 
+                    b.Property<int>("CategoryId")
+                        .HasColumnType("INTEGER");
+
                     b.Property<DateTime?>("Date")
                         .IsRequired()
                         .HasColumnType("TEXT");
@@ -55,7 +58,20 @@ namespace PersonalFinanceTracker.Data.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("CategoryId");
+
                     b.ToTable("Transactions");
+                });
+
+            modelBuilder.Entity("PersonalFinanceTracker.Data.Models.Transaction", b =>
+                {
+                    b.HasOne("PersonalFinanceTracker.Data.Models.Category", "Category")
+                        .WithMany()
+                        .HasForeignKey("CategoryId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Category");
                 });
 #pragma warning restore 612, 618
         }
