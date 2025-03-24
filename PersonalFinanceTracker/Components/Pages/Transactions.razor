@@ -1,5 +1,8 @@
 ﻿@page "/transactions"
+@rendermode InteractiveServer
 @using System.Globalization
+@using BlazorBootstrap
+@using PersonalFinanceTracker.Data.Models
 
 <h3> My Transactions</h3>
 
@@ -7,37 +10,37 @@
 {
     <p>Loading...</p>
 }
-else if (transactions.Count == 0)
+else if (transactions.Count() == 0)
 {
     <p>No transactions found.</p>
 }
 else
 {
-    <table class="table">
-        <thead>
-            <tr>
-                <th>Date</th>
-                <th>Amount</th>
-                <th>Description</th>
-                <th>Category</th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var transaction in transactions)
-            {
-                <tr>
-                    <td>@transaction.Date?.ToString("dd-MMM-yyyy")</td>
-                    <td>@transaction.Amount.ToString("C", CultureInfo.GetCultureInfo("en-CA"))</td>
-                    <td>@transaction.Description</td>
-                    <td>@transaction.Category?.Name</td>
-                </tr>
-            }
-            <tr>
-                <td class="fw-bold">Total</td>
-                <td colspan="3" class="align-content-lg-start">@transactions.Sum(a => a.Amount).ToString("C", CultureInfo.GetCultureInfo("en-CA"))</td>
-            </tr>
-        </tbody>
-    </table>
+    <Grid TItem="Transaction"
+          Class="table table-hover"
+          DataProvider="TransactionDataProvider"
+          AllowSorting="true"
+          AllowPaging="true"
+          PageSize="5"
+          Responsive="true">
+        <GridColumns>
+            <GridColumn TItem="Transaction" HeaderText="Id" PropertyName="Id">
+                @context.Id
+            </GridColumn>
+            <GridColumn TItem="Transaction" HeaderText="Date" PropertyName="Date" SortKeySelector="item => item.Date">
+                @context.Date?.ToString("dd-MMM-yyyy")
+            </GridColumn>
+            <GridColumn TItem="Transaction" HeaderText="Amount" PropertyName="Amount" SortKeySelector="item => item.Amount">
+                @context.Amount.ToString("C", CultureInfo.GetCultureInfo("en-CA"))
+            </GridColumn>
+            <GridColumn TItem="Transaction" HeaderText="Category" PropertyName="Category">
+                @context.Category?.Name
+            </GridColumn>
+            <GridColumn TItem="Transaction" HeaderText="Description" PropertyName="Description">
+                @context.Description
+            </GridColumn>
+        </GridColumns>
+    </Grid>   
 }
 
 
